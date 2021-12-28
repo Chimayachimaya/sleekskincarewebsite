@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head'); %>
+  <body>
+    <%- include('../partials/header'); %>
+    <div class="container">
+      <div class="breadcumb">
+        <a href="/sleekskincare">home</a>
+        <span><i class="bx bxs-chevrons-right"></i></span>
+      <span><%= products[0].prod_name%></span>
+      </div>
+    </div>
+    <main class="container">
+      <div class="home">
+        <!-- ===== SNEAKER ===== -->
+        <div class="sneaker">
+          <div></div>
+
+          <div>
+            <img
+              src="/products/<%=products[0].prod_img%>"
+              alt="<%=products[0].prod_img%>"
+              class="sneaker__figure shows"
+              color="#A29596"
+            />
+          </div>
+        </div>
+
+        <!-- ===== IFORMACION ===== -->
+        <div class="info">
+          <!-- ===== DATA ===== -->
+          <div class="data">
+            <span class="data__subtitle">Sleek</span>
+            <% let title = products[0].prod_name %>  
+            <h1 class="data__title"><%= title.slice(0, 30)%>
+            <br>
+           <h1 class="data__title" style="font-size: 1.3rem"><%=title.slice(30)%></h1>
+            </h1>
+            <div class="read-more-container">   
+              <% let firstDetails = products[0].prod_details %>    
+                <p>                 
+                  <%= firstDetails.slice(0, 100)%><span class="read-more-text">
+                  <%=firstDetails.slice(100)%>
+                  </span>
+                </p>
+                <span class="read-more-btn">Read More...</span>         
+            </div>
+          </div>
+
+          <!-- ===== ACTIONS ===== -->
+          <div class="actions">
+            <!-- ===== SIZE ===== -->
+            <div class="size">
+              <h3 class="size__title">Stock</h3>
+              <div class="size__content">
+                <span class="size__tallas"><%= products[0].prod_qty%></span>
+              </div>
+            </div>
+          <form action="/sleekskincare/product-details/cart/<%=products[0].prod_id%>" method="post">
+            <!-- ===== CANT ===== -->
+            <div class="cant">
+              <h3 class="cant__title">Quantity</h3>
+              <div class="quantity">
+                <input type="text" value="<%=products[0].price%>" name="price" hidden>
+                <button class="btn minus-btn disabled" type="button">-</button>
+                <input type="text" id="quantity" value="1" name="quantity" autocomplete="off">
+                <button class="btn plus-btn" type="button">+</button>
+            </div>
+            </div>
+          </div>
+
+          <!-- ===== PRECI ===== -->
+          <div class="preci">
+            <%let maybawas%>
+            <%if(user.customer_position == "Distributor"){%>
+             <%maybawas =products[0].price - (products[0].price * 0.2) %>
+              
+             <%} else {%>
+               <%maybawas =products[0].price - (products[0].price * 0.1) %>
+               <%} %>
+            <span class="preci__title">₱<%= maybawas%></span>
+            <button type="submit" class="preci__button" >Add To Cart</button>
+          </div>
+        </form>
+        </div>
+      </div>
+    </main>
+
+    <section class="container">
+      <div class="customer-reviews2">
+        <div class="left-reviews">
+          <h2>Customer Reviews</h2>
+      
+          <% if (Number.isNaN(Math.floor(products[0].No_Of_Reviews /
+          (products[0].Total_No_Of_Reviews - 1)))) { %> <% for(let i =0;
+          i < 5; i++){ %>
+          <i class="bx bxs-star nocolor"></i>
+          <% } %> 
+          <span>&nbsp;&nbsp;&nbsp;0 out of 5</span>
+          <br/>
+          <span>0 rating</span>
+          <% } else { %>
+            <% let totalReviews = products[0].Total_No_Of_Reviews - 1 %>
+             <% let rate = Math.floor(products[0].No_Of_Reviews / totalReviews) %>
+             <% let rate2 = products[0].No_Of_Reviews / totalReviews %>
+          <div class="rate-stars">
+            <% for(let i = 0; i < rate; i++){ %>
+            <i class="bx bxs-star"></i>
+            <% } %> <% let rateForNoColor = 5 - rate %> <% for(let i =0;
+            i < rateForNoColor; i++){ %>
+            <i class="bx bxs-star nocolor"></i>
+            <% } %>
+            <span><%= rate2.toFixed(2)%> out of 5</span>
+            <br/>
+            <span><%= totalReviews%>  ratings</span>
+          </div>
+          <% } %>
+    
+
+        </div>
+
+        <div class="right-reviews">
+
+          <div class="tabs_wrap">
+            <ul>
+              <li data-tabs="all" class="active">All</li>
+              <li data-tabs="five">5 Star</li>
+              <li data-tabs="four">4 Star</li>           
+              <li data-tabs="three">3 Star</li>
+              <li data-tabs="two">2 Star</li>
+              <li data-tabs="one">1 Star</li>
+          
+            </ul>
+          </div>
+          <% for(let i = 0; i < comment.length; i++){ %>
+            <% if (comment[i].score == 1) { %> 
+          <div class="testimonial-box item_wrap one">
+            <% } else if (comment[i].score == 2){ %> 
+              <div class="testimonial-box item_wrap two">
+                <% } else if (comment[i].score == 3){ %> 
+                  <div class="testimonial-box item_wrap three">
+                    <% } else if (comment[i].score == 4){ %> 
+                      <div class="testimonial-box item_wrap four">
+                        <% } else if (comment[i].score == 5){ %> 
+                          <div class="testimonial-box item_wrap five">
+                        <% } %> 
+            <!-- 1 -->
+            <div class="box-top">
+              <!--profile----->
+              <div class="profile">
+                <!--img---->
+                <div class="profile-img">
+                  <img src="/profiles/<%=comment[i].customer_img%>" alt="<%=comment[i].customer_img%>"/>
+                </div>
+                <!--name-and-username-->
+                <div class="name-user">
+                  <strong><%= comment[i].customer_fname%> <%= comment[i].customer_lname%></strong>
+                  <span><%= comment[i].customer_position%></span>
+                </div>
+              </div>
+              <!--reviews------>
+  
+
+              <div class="rate-stars-from-customer">
+                <% let rateFromCustomer = comment[i].score %>
+                <% for(let i = 0; i < rateFromCustomer; i++){ %>
+                <i class="bx bxs-star"></i>
+                <% } %> 
+                <% let rateForNoColor = 5 - rateFromCustomer %> <% for(let i =0;
+            i < rateForNoColor; i++){ %>
+            <i class="bx bxs-star nocolor"></i>
+            <% } %>
+
+              </div>
+            </div>
+            <!--Comments---------------------------------------->
+            <div class="client-comment">
+              <p>
+                <%= comment[i].remarks%>
+              </p>
+            </div>
+          </div>
+          <% } %>
+
+       
+        </div>
+       
+      </div>
+    </section>
+
+
+         <!-- -- ======== Start Related Products ======= -- -->
+    <div class="section-title container">
+      <h2>Related <span>Products</span></h2>
+    </div>
+
+    <section class="list-prod-section">
+      <div class="container">
+        <div class="collection-2-grid list-prod-grid">
+          <!--List Product -->
+          <% for(let i = 0; i < related.length; i++){ %>
+          <div class="prod-item">
+            <a href="/sleekskincare/product-details/<%= related[i].prod_id %>">
+              <div class="item-img">
+                <img
+                  src="/products/<%=related[i].prod_img%>"
+                  alt="<%=related[i].prod_img%>"
+                />
+              </div>
+            </a>
+            <div class="item-info">
+              <div class="product-title2">
+                <span>
+                  <p class="name-title2"><%= related[i].prod_name%></p>
+                  <% if (Number.isNaN(Math.floor(related[i].No_Of_Reviews /
+                (related[i].Total_No_Of_Reviews - 1)))) { %> <% for(let i =0;
+                i < 5; i++){ %>
+                  <i class="bx bxs-star nocolor"></i>
+                  <% } %>  <br/>
+                  <% } else { %> <% let rate =
+                 Math.floor(related[i].No_Of_Reviews /
+                 (related[i].Total_No_Of_Reviews - 1)); %>
+                  <div class="rate-stars">
+                    <% for(let i = 0; i < rate; i++){ %>
+                    <i class="bx bxs-star"></i>
+                    <% } %> <% let rateForNoColor = 5 - rate %> <% for(let i =0;
+                  i < rateForNoColor; i++){ %>
+                    <i class="bx bxs-star nocolor"></i>
+                    <% } %>
+                  </div>
+                  <% } %>
+                </span>
+              </div>
+              <%let maybawas2%>
+              <%if(user.customer_position == "Distributor"){%>
+               <%maybawas2 =related[i].price - (related[i].price * 0.2) %>
+                
+               <%} else {%>
+                 <%maybawas2 =related[i].price - (related[i].price * 0.1) %>
+                 <%} %>
+              <span class="price">₱<%= maybawas2%></span>
+            </div>
+          </div>
+           <% } %>
+    
+          <!------------------>
+        </div>
+
+      </div>
+    </section>
+    <!-- -- ======== End Related Products ======= -- -->
+
+    <%- include('../partials/footer'); %>
+    <script src="/js/details.js"></script>
+    <script src="/js/dropdown.js"></script>
+    
+  </body>
+</html>

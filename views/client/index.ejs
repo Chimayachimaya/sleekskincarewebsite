@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head'); %>
+  <body>
+    <%- include('../partials/header'); %>
+    <!-- ======== Main Banner ======= -->
+    <section class="main-banner container">
+      <div class="left-side-box">
+        <div class="slider">
+          <div class="slide active">
+            <img src="/img/slider2.png" alt="" />
+          </div>
+          <div class="slide">
+            <img src="/img/slider22.png" alt="" />
+          </div>
+          <div class="slide">
+            <img src="/img/slider3.png" alt="" />
+          </div>
+          <div class="slide">
+            <img src="/img/slider4.png" alt="" />
+          </div>
+          <div class="slide">
+            <img src="/img/slider5.png" alt="" />
+          </div>
+          <div class="navigation-button">
+            <i class="bx bxs-chevron-left prev-btn"></i>
+            <i class="bx bxs-chevron-right next-btn"></i>
+          </div>
+          <div class="navigation-circle">
+            <div class="slide-icon active"></div>
+            <div class="slide-icon"></div>
+            <div class="slide-icon"></div>
+            <div class="slide-icon"></div>
+            <div class="slide-icon"></div>
+          </div>
+        </div>
+      </div>
+
+      <% if (user.customer_id > 0) {%>
+      <div
+        class="right-side-box right-side-box-a"
+        style="background-image: url('/img/loginbanner1.png')"
+      >
+        <a href="/sleekskincare/signup"></a>
+      </div>
+
+      <div
+        class="right-side-box right-side-box-b"
+        style="background-image: url('/img/loginbanner2.png')"
+      >
+        <a href="/sleekskincare/signup"></a>
+      </div>
+      <% } else {%>
+      <div
+        class="right-side-box right-side-box-a"
+        style="background-image: url('/img/bannersmall1.png')"
+      >
+        <a href="/sleekskincare/signup"></a>
+      </div>
+
+      <div
+        class="right-side-box right-side-box-b"
+        style="background-image: url('/img/bannersmall2.png')"
+      >
+        <a href="/sleekskincare/signup"></a>
+      </div>
+      <% } %>
+    </section>
+
+    <% if (user.customer_id > 0) {%>
+    <section class="small-banner container">
+      <div class="banner-div">
+        <img src="/img/loginbanner1.png" alt="" />
+      </div>
+
+      <div class="banner-div">
+        <img src="/img/loginbanner2.png" alt="" />
+      </div>
+    </section>
+    <% } else {%>
+    <section class="small-banner container">
+      <div class="banner-div">
+        <img src="/img/bannersmall1.png" alt="" />
+      </div>
+
+      <div class="banner-div">
+        <img src="/img/bannersmall2.png" alt="" />
+      </div>
+    </section>
+    <% } %>
+
+    <!-- ======== End Main Banner ======= -->
+
+    <!-- -- ======== Start Service ======= -- -->
+    <section class="container">
+      <div class="service-wrp-inner">
+        <!--1-->
+
+        <div class="service-card bg-dark">
+          <div class="d-flex">
+            <div class="service-icons">
+              <i class="bx bxs-purchase-tag"></i>
+            </div>
+            <div class="service-title">
+              <h5>Amazing value Every Day</h5>
+            </div>
+          </div>
+        </div>
+
+        <!--2-->
+
+        <div class="service-card bg-dark">
+          <div class="d-flex">
+            <div class="service-icons">
+              <i class="bx bxs-check-shield"></i>
+            </div>
+            <div class="service-title">
+              <h5>Trusted Brand</h5>
+            </div>
+          </div>
+        </div>
+
+        <!--3-->
+
+        <div class="service-card bg-dark">
+          <div class="d-flex third-service">
+            <div class="service-icons">
+              <i class="bx bxs-truck"></i>
+            </div>
+            <div class="service-title">
+              <h5>Fast & Free Shipping Over ₱1K</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- -- ======== End Service ======= -- -->
+
+    <!-- -- ======== Start Monthly Deals ======= -- -->
+    <div class="section-title container">
+      <h2>Monthly <span>Deals</span></h2>
+    </div>
+    <!-- Left Side -->
+    <section class="monthly-section container">
+      <div class="monthly-left-side">
+        <div class="monthly-countdown">
+          <div class="countdown">00 : 00 : 00 : 00</div>
+        </div>
+      </div>
+
+      <!-- Monthly Top Swiper -->
+      <div class="monthly-right-side monthly-right-side-a">
+        <section class="monthly-product container">
+          <div class="monthly-grid">
+            <% if (products.length > 0) { %> <% for(let i = 0; i < 8; i++){ %>
+            <div class="monthly-grid-item">
+              <a
+                href="/sleekskincare/product-details/<%= products[i].prod_id %>"
+              >
+                <div class="monthly-img">
+                  <img src="products/<%=products[i].prod_img%>" />
+                </div>
+              </a>
+              <div class="item-info">
+                <div class="monthly-product-title">
+                  <span>
+                    <p class="name-title"><%= products[i].prod_name%></p>
+                    <% if (Number.isNaN(Math.floor(products[i].No_Of_Reviews /
+                    (products[i].Total_No_Of_Reviews - 1)))) { %> <% for(let i
+                    =0; i < 5; i++){ %>
+                    <i class="bx bxs-star nocolor"></i>
+                    <% } %> <% } else { %> <% let rate =
+                    Math.floor(products[i].No_Of_Reviews /
+                    (products[i].Total_No_Of_Reviews - 1)); %>
+                    <div class="rate-stars">
+                      <% for(let i = 0; i < rate; i++){ %>
+                      <i class="bx bxs-star"></i>
+                      <% } %> <% let rateForNoColor = 5 - rate %> <% for(let i
+                      =0; i < rateForNoColor; i++){ %>
+                      <i class="bx bxs-star nocolor"></i>
+                      <% } %>
+                    </div>
+                    <% } %>
+                  </span>
+                </div>
+                <% if (user.customer_position == "Distributor") { %> <% let
+                disPrice =products[i].price - (products[i].price * 0.20) %>
+                <div class="price">
+                  ₱<%= disPrice %> <span>₱<%=products[i].price %></span>
+                </div>
+                <% } else { %> <% let sePrice =products[i].price -
+                (products[i].price * 0.10) %>
+                <div class="price">
+                  ₱<%= sePrice %> <span>₱<%=products[i].price %></span>
+                </div>
+                <% } %>
+              </div>
+            </div>
+            <% } %> <% } else { %>
+            <div></div>
+            <% } %>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- -- ======== End Monthly Deals ======= -- -->
+
+    <!-- -- ======== Start Small Banner ======= -- -->
+    <section id="smallbanner1" class="container"></section>
+    <!-- -- ======== End Small Banner ======= -- -->
+
+    <!-- -- ======== Start List Of Products ======= -- -->
+    <div class="section-title container">
+      <h2>Our <span>Products</span></h2>
+    </div>
+
+    <section class="list-prod-section">
+      <div class="container">
+        <div class="collection-2-grid list-prod-grid">
+          <!--List Product -->
+          <% if (products.length > 0) { %> <% for(let i = 0; i <
+          products.length; i++){ %>
+          <div class="prod-item">
+            <a href="/sleekskincare/product-details/<%= products[i].prod_id %>">
+              <div class="item-img">
+                <img
+                  src="products/<%=products[i].prod_img%>"
+                  alt="<%=products[i].prod_img%>"
+                />
+              </div>
+            </a>
+            <div class="item-info">
+              <div class="product-title2">
+                <span>
+                  <p class="name-title2"><%= products[i].prod_name%></p>
+                  <% if (Number.isNaN(Math.floor(products[i].No_Of_Reviews /
+                  (products[i].Total_No_Of_Reviews - 1)))) { %> <% for(let i =0;
+                  i < 5; i++){ %>
+                  <i class="bx bxs-star nocolor"></i>
+                  <% } %> <% } else { %> <% let rate =
+                  Math.floor(products[i].No_Of_Reviews /
+                  (products[i].Total_No_Of_Reviews - 1)); %>
+                  <div class="rate-stars">
+                    <% for(let i = 0; i < rate; i++){ %>
+                    <i class="bx bxs-star"></i>
+                    <% } %> <% let rateForNoColor = 5 - rate %> <% for(let i =0;
+                    i < rateForNoColor; i++){ %>
+                    <i class="bx bxs-star nocolor"></i>
+                    <% } %>
+                  </div>
+                  <% } %>
+                </span>
+              </div>
+              <% if (user.customer_position == "Distributor") { %> <% let
+              disPrice =products[i].price - (products[i].price * 0.20) %>
+              <div class="price">
+                ₱<%= disPrice %> <span>₱<%=products[i].price %></span>
+              </div>
+              <% } else { %> <% let sePrice =products[i].price -
+              (products[i].price * 0.10) %>
+              <div class="price">
+                ₱<%= sePrice %> <span>₱<%=products[i].price %></span>
+              </div>
+              <% } %>
+            </div>
+          </div>
+          <% } %> <% } else { %>
+          <div></div>
+          <% } %>
+          <!------------------>
+        </div>
+
+        <!-- <a href="/sleekskincare/search" class="btn prod-btn">Show Me More</a> -->
+      </div>
+    </section>
+    <!-- -- ======== End List Of Products ======= -- -->
+
+    <!-- -- ======== Start Small Banner 2 ======= -- -->
+    <section id="smallbanner2" class="container"></section>
+    <!-- -- ======== End Small Banner 2 ======= -- -->
+
+    <!-- -- ======== Start Testimonial ======= -- -->
+    <div class="container">
+      <section class="reviews-section">
+        <div class="reviews-title">
+          <div><p>Real Reviews from Sleek Customers</p></div>
+          <div class="rate-stars right-side">
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <span><%=reviews.length%> Reviews</span>
+          </div>
+        </div>
+
+        <div class="swiper customer-reviews">
+          <div class="swiper-wrapper">
+            <% if (reviews.length > 0) { %> <% for(let i =0; i < reviews.length;
+            i++){ %>
+            <div class="swiper-slide review-card">
+              <div class="card-top">
+                <div class="rate-stars">
+                  <% for(let x =0; x < reviews[i].score; x++){ %>
+                  <i class="bx bxs-star"></i>
+                  <% } %> <% for(let x =0; x < 5 - reviews[i].score; x++){ %>
+                  <i class="bx bxs-star nocolor"></i>
+                  <% } %>
+                </div>
+                <span class="date"><%= reviews[i].date%></span>
+              </div>
+
+              <div class="image-text">
+                <img
+                  src="products/<%=reviews[i].prod_img%>"
+                  alt="<%=reviews[i].prod_img%>"
+                  class="img-prod"
+                />
+
+                <p class="card-body">
+                  <%=reviews[i].remarks%>
+                  <br /><br /><span
+                    ><%=reviews[i].customer_lname%>,
+                    <%=reviews[i].customer_fname%></span
+                  ><br /><span style="font-weight: 500"
+                    ><%=reviews[i].customer_position%></span
+                  >
+                </p>
+              </div>
+            </div>
+            <% }} else { %>
+            <div class="swiper-slide review-card"></div>
+            <% } %>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- -- ======== End Testimonial ======= -- -->
+    <%- include('../partials/footer'); %>
+    <!-- ======== SwiperJS ======= -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.7.5/swiper-bundle.min.js"></script>
+    <script src="/js/index.js"></script>
+    <script src="/js/dropdown.js"></script>
+  </body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head_admin'); %>
+  <body>
+    <%- include('../partials/sidebar_admin'); %>
+
+    <section class="all-product">
+      <div class="wrapper">
+        <div class="title-div">
+          <span>Orders</span>
+        </div>
+        <div class="cart-form">
+          <div class="div-header">
+            <div class="div-all bord-active">
+              <a href="/admin/all-orders">All</a>
+            </div>
+            <div class="div-all">
+              <a href="/admin/all-toship">To Ship</a>
+            </div>
+            <div class="div-all">
+              <a href="/admin/all-toreceive">To Receive</a>
+            </div>
+            <div class="div-all">
+              <a href="/admin/all-completed">Completed</a>
+            </div>
+            <div class="div-all">
+              <a href="/admin/all-cancelled">Cancelled</a>
+            </div>
+          </div>
+
+          <!-- <div class="p-nav filter-div">
+
+            <div class="search-div">
+              <input
+                type="search"
+                class="all-search"
+                placeholder="Search products"
+              />
+            </div>
+            <div class="rows-div">
+              <span>Status : </span>
+              <select id="status-selection"></select>
+            </div>
+            <div class="rows-div">
+              <span>Number rows: </span>
+              <select id="number-rows" onchange="showRows(this.value)"></select>
+            </div>
+            <div class="sort-div">
+              <span>Sort-by: </span>
+              <select id="sort-by" onchange="showSort(this.value)"></select>
+            </div>
+            <div class="exp-div">
+              <span class="dot"><i class="bg-success"></i>Active </span>
+              <span class="dot"><i class="bg-warning"></i>Draft </span>
+              <span class="dot"><i class="bg-danger"></i>Archive </span>
+            </div>
+          </div> -->
+          <div class="row-prod">
+            <div class="prod-div">Product</div>
+            <div class="category-div">Order Total</div>
+            <div class="price-div">Status</div>
+            <div class="inventory-div">Order Id</div>
+            <div class="expiration-div">Actions</div>
+          </div>
+
+          <section class="purchase-body">
+            <% if (allOrders.length > 0) {%> <%
+            Object.entries(allOrders).forEach(([key, value]) => {%> <%let name
+            =value[0].customer_fname +" "+ value[0].customer_lname%>
+            <divc class="ss">
+              <div class="name-cus"><%=name %></div>
+              <div class="total_cus"><%=value[0].total_amount %></div>
+              <div class="status_cus"><%=value[0].order_status %></div>
+              <div class="order_cus"><%=value[0].order_id %></div>
+
+              <div>
+                <%if (value[0].order_status == "Pending"){ %>
+                <button
+                  class="btn-acc"
+                  id="ordID"
+                  value="<%=value[0].order_id %>"
+                >
+                  Accept
+                </button>
+                <%} else if (value[0].order_status == "Accept"){ %>
+                <button
+                  class="btn-acc"
+                  id="ordID"
+                  value="<%=value[0].order_id %>"
+                >
+                  To Receive
+                </button>
+                <%} else if (value[0].order_status == "Completed"){ %>
+                <button
+                  class="btn-acc"
+                  id="ordID"
+                  value="<%=value[0].order_id %>"
+                >
+                  Completed
+                </button>
+                <%} %>
+              </div>
+            </divc>
+            <% for(let i = 0; i < value.length; i++){%>
+            <a href="#">
+              <div class="prod-body">
+                <div class="prod-div divdiv">
+                  <div>
+                    <img
+                      src="/products/<%=allOrders[key][i].prod_img %>"
+                      alt=""
+                    />
+                  </div>
+                  <div>
+                    <span class="prod_quantity"
+                      >x<%=allOrders[key][i].quantity %></span
+                    >
+                  </div>
+                </div>
+                <div class="category-div cat-div">
+                  <%=allOrders[key][i].prod_name %>
+                </div>
+                <div class="price-div">`</div>
+                <div class="inventory-div"></div>
+                <div class="expiration-div"></div>
+                <div class="status-div"></div>
+              </div>
+            </a>
+            <% }});}else{%>
+            <div class="all-orders">
+              <img src="/img/order.png" alt="order icon" />
+              <span>Your orders will show here</span>
+            </div>
+            <% }%>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <%- include('../partials/footer_admin'); %>
+
+    <script src="/js/accept.js"></script>
+  </body>
+</html>

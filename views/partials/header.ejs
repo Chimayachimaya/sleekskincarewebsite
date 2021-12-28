@@ -1,0 +1,222 @@
+<header>
+  <div class="small-header flex">
+    <div class="container flex">
+      <div class="small-header-left">
+        <!-- If someone are login, Greet them with their name -->
+        <% if (user.customer_id > 0) {%>
+        <span>Hello, <%=user.customer_fname%></span>
+        <% } else {%>
+        <span>Welcome to Sleek</span>
+        <% } %>
+        <span class="vanish"><a href="#"> Find a branch</a></span>
+        <span class="vanish"
+          ><i class="bx bxs-phone small-header-icon"></i>&nbsp; +123456789</span
+        >
+      </div>
+      <div>
+        <ul class="small-header-right flex">
+          <li>
+            <a href="https://www.facebook.com/sleekskincare">
+              <i class="bx bxl-facebook small-header-icon"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/sleekskincare.official/">
+              <i class="bx bxl-instagram-alt small-header-icon"></i>
+            </a>
+          </li>
+          <!-- If someone are login, Show Logout Button -->
+          <% if (user.customer_id > 0) {%>
+          <li>
+            <a href="/sleekskincare/logout" class="vanish">Log Out</a>
+          </li>
+          <% } else {%>
+          <li>
+            <a href="/sleekskincare/login" class="vanish">Log In</a>
+          </li>
+          <% } %>
+          <li>
+            <a href="#" class="vanish"
+              ><i class="bx bx-help-circle small-header-icon"></i
+            ></a>
+          </li>
+          <li>
+            <img
+              src="/img/down.png"
+              alt="arrow down"
+              class="dropdown-toggle arrow-img"
+              data-toggle="small-header-menu"
+            />
+            <ul id="small-header-menu" class="dropdown-menu">
+              <li class="dropdown-menu-item">
+                <a href="#" class="dropdown-menu-link">
+                  <span>Find a Branch</span>
+                </a>
+              </li>
+              <li class="dropdown-menu-item">
+                <a href="#" class="dropdown-menu-link">
+                  <span><i class="bx bx-help-circle"></i> Help</span>
+                </a>
+              </li>
+
+              <li class="dropdown-menu-item">
+                <!-- If someone are login, Show Logout Button -->
+                <% if (user.customer_id > 0) {%>
+
+                <a
+                  href="/sleekskincare/logout"
+                  class="dropdown-menu-link last-item"
+                  ><span>Log Out</span></a
+                >
+
+                <% } else {%>
+
+                <a
+                  href="/sleekskincare/login"
+                  class="dropdown-menu-link last-item"
+                  ><span>Log In</span></a
+                >
+
+                <% } %>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="big-header">
+    <div class="container">
+      <% if (title == "Checkout") {%>
+
+      <div class="big-header-content">
+        <div>
+          <a href="/sleekskincare" class="nav-logo"
+            ><img class="checkout-img" src="/img/logo.png" alt="Sleek Logo" />
+          </a>
+        </div>
+        <div class="checkout-text"><span>Checkout</span></div>
+      </div>
+
+      <%} else if (title == "Your Order") {%>
+
+      <div class="big-header-content">
+        <div>
+          <a href="/sleekskincare" class="nav-logo"
+            ><img class="checkout-img" src="/img/logo.png" alt="Sleek Logo" />
+          </a>
+        </div>
+        <div class="checkout-text"><span>Your Shopping Cart</span></div>
+      </div>
+
+      <% } else if (title == "Log In"){%>
+
+      <div class="big-header-content">
+        <div>
+          <a href="/sleekskincare" class="nav-logo"
+            ><img
+              class="checkout-img login-img"
+              src="/img/logo.png"
+              alt="Sleek Logo"
+          /></a>
+        </div>
+        <div class="checkout-text">Log In</div>
+      </div>
+      <% } else if (title == "Sign Up"){%>
+
+      <div class="big-header-content">
+        <div>
+          <a href="/sleekskincare" class="nav-logo"
+            ><img
+              class="checkout-img login-img"
+              src="/img/logo.png"
+              alt="Sleek Logo"
+          /></a>
+        </div>
+        <div class="checkout-text">Sign Up</div>
+      </div>
+      <% } else {%>
+      <div class="big-header-content">
+        <a href="/sleekskincare" class="nav-logo"
+          ><img src="/img/logo.png" alt="Sleek Logo"
+        /></a>
+
+        <form action="/sleekskincare" method="post" class="big-header-form">
+          <input
+            type="search"
+            placeholder="Search for product name or category"
+            name="search"
+          />
+          <button type="submit" for="search" class="bx bx-search-alt"></button>
+        </form>
+
+        <% if (user.customer_id > 0) {%>
+        <a href="/sleekskincare/your-order" class="nav-cart-user">
+          <% if (title == "Your Order") {%>
+          <i class="bx bx-cart color-red"></i>
+          <% } else {%>
+          <i class="bx bx-cart"></i>
+          <% } %> <% if (cartTotal.length > 0) {%>
+          <span class="d-flex"><%=cartTotal.length%></span>
+          <% } else {%>
+          <span class="d-flex">0</span>
+          <% } %>
+        </a>
+
+        <div class="big-header-profile">
+          <% if (user.customer_img == null) {%>
+          <img
+            src="/img/profile.png"
+            class="dropdown-toggle big-header-profile-img"
+            alt="default profile"
+            data-toggle="profile-menu"
+          />
+          <% } else {%>
+          <img
+            src="/profiles/<%=user.customer_img%>"
+            class="dropdown-toggle big-header-profile-img"
+            alt="user image"
+            data-toggle="profile-menu"
+          />
+          <% } %>
+          <ul id="profile-menu" class="profile-dropdown-menu">
+            <li class="dropdown-menu-item">
+              <a
+                href="/sleekskincare/myaccount"
+                class="dropdown-menu-link profile-link"
+              >
+                <span>My Account</span>
+              </a>
+            </li>
+            <li class="dropdown-menu-item">
+              <a
+                href="/sleekskincare/mypurchase"
+                class="dropdown-menu-link profile-link"
+              >
+                <span>My Purchase</span>
+              </a>
+            </li>
+
+            <li class="dropdown-menu-item">
+              <a
+                href="/sleekskincare/logout"
+                class="dropdown-menu-link last-item profile-link"
+                ><span>Log Out</span></a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <% } else {%>
+        <a href="/sleekskincare/your-order" class="nav-cart-none-user">
+          <i class="bx bx-cart"></i>
+          <span class="d-flex">0</span>
+        </a>
+
+        <% } %>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</header>

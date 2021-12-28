@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head'); %>
+  <body>
+    <%- include('../partials/header'); %>
+    <section class="signdetails-section forgot-page">
+      <div class="container">
+        <div class="otp-forms">
+          <div class="container-sign">
+            <div class="form-outer">
+              <form>
+                <div class="page slide-page">
+                  <div class="enter-ver">Enter your Phone</div>
+                  <div class="bot-enter">
+                    This phone number must be registered in<br />
+                    <span>Sleek Skin Care</span>
+                  </div>
+
+                  <div class="field"><input type="text" id="eORp" /></div>
+
+                  <div class="field">
+                    <button class="firstNext next">Verify</button>
+                  </div>
+                  <div class="err-msg">
+                    <span id="err">fdfdf</span>
+                  </div>
+                </div>
+
+                <div class="page page2">
+                  <input type="text" id="phoneno" value="" hidden />
+
+                  <div class="field">
+                    <div class="label">Enter your verification code</div>
+                    <input type="text" id="email" />
+                  </div>
+
+                  <div class="err-msg3">
+                    <span id="err-all"></span>
+                  </div>
+                  <div class="field btns">
+                    <button class="next-1 next">Submit</button>
+                  </div>
+
+                  <div class="hidden-notrecive">
+                    <span>Did not receive the code?</span>
+                  </div>
+                  <div class="hidden-resend">
+                    <a id="resend">Resend </a><span>or</span>
+                    <a href="/sleekskincare/signup">Wrong Phone No.</a>
+                  </div>
+                  <div class="enter-label3">
+                    Please wait <span id="timer"></span> seconds to resend
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <%- include('../partials/footer'); %>
+    <script src="/js/forgot.js"></script>
+  </body>
+</html>

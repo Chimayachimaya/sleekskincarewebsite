@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head_admin'); %>
+  <body>
+    <%- include('../partials/sidebar_admin'); %>
+    <section class="all-product">
+      <div class="wrapper">
+        <div class="title-div">
+          <span>Products</span>
+        </div>
+        <div class="cart-form">
+          <input type="radio" name="slider" checked id="all" />
+          <input type="radio" name="slider" id="Active" />
+          <input type="radio" name="slider" id="Draft" />
+          <input type="radio" name="slider" id="Archive" />
+
+          <div class="p-nav">
+            <nav>
+              <label for="all" class="all">All</label>
+              <label for="Active" class="Active">Active</label>
+              <label for="Draft" class="Draft">Draft</label>
+              <label for="Archive" class="Archive">Archive</label>
+              <div class="add-prod">
+                <button><i class="bx bx-plus"></i> Add New Product</button>
+              </div>
+              <div class="slider"></div>
+            </nav>
+          </div>
+          <div class="p-nav filter-div">
+            <div class="search-div">
+              <input
+                type="search"
+                class="all-search"
+                placeholder="Search products"
+              />
+            </div>
+
+            <div class="rows-div">
+              <span>Number rows: </span>
+              <select id="number-rows" onchange="showRows(this.value)"></select>
+            </div>
+            <div class="sort-div">
+              <span>Sort-by: </span>
+              <select id="sort-by" onchange="showSort(this.value)"></select>
+            </div>
+          </div>
+          <div class="row-prod">
+            <div class="prod-div">Product</div>
+            <div class="category-div">Category</div>
+            <div class="price-div">Price</div>
+            <div class="inventory-div">Inventory</div>
+            <div class="expiration-div">Expiration</div>
+            <div class="status-div">Status</div>
+          </div>
+
+          <section class="purchase-body">
+            <div class="content content-1"></div>
+            <div class="content content-2"></div>
+            <div class="content content-3"></div>
+            <div class="content content-4"></div>
+          </section>
+        </div>
+      </div>
+    </section>
+    <%- include('../partials/footer_admin'); %>
+    <script src="/js/allprod.js"></script>
+  </body>
+</html>

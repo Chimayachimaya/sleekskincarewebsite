@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head'); %>
+  <body>
+    <%- include('../partials/header'); %> 
+    <% let MSubtotal = 0%>
+    <section class="cart-section">
+      <div class="container-add">
+        <div class="responsive__cart-area">
+          <div class="cart-form">
+         
+            <div class="checkout-table">
+              <form action="/sleekskincare/checkout" method="post">
+             
+             
+                <!-- <% if(allDefault.length > 0) {%> -->
+
+                <!-- <div class="c-head shipping-option">
+                  <div class="c-address c-padding">Delivery Address</div>    
+                  <div ><button id="changeAddress" type="button"><i class='bx bx-plus'></i> &nbsp;Change Address</button></div>            
+
+                      </div>
+                <div class="list-address">
+                <div class="alladdress c-margin c-head shipping-option"> -->
+                  
+                  <!-- <div class="c-prod c-padding blocking">
+                    <input type="radio" name="addr" value="<%= allDefault[0].region %>" checked>                 
+                    <span class="bolder"> <%= allDefault[0].fullname %> <%= allDefault[0].phonenumber %> </span>
+                    <%= allDefault[0].city %> 
+
+                    <% if(allDefault[0].defaultAddress == 0) {%>
+                    <span class="lighter"> </span>
+                    <% }else{%>
+                      <span class="lighter">Default</span>
+                      <% }%>
+                 <button id="change" type="button">change</button>
+                  </div> -->
+                 
+           <!--
+                    <div class="c-prod c-padding blocking">
+                      <input type="radio" name="addr" id="2">
+                      <label for="2">
+                      <span class="bolder"> bod.fullname + </span>
+                      bod.zipcode + <span class="lighter"> </span>
+                    </label>
+                    </div>
+  
+                      <div class="c-prod c-padding blocking">
+                        <label for="2">
+                        <input type="radio" name="addr" id="3">
+                        <span class="bolder"> bod.fullname + </span>
+                        bod.zipcode + <span class="lighter"> </span>
+                      </label>
+                      </div> -->
+                    
+                      
+                <!-- </div>
+              
+              </div> -->
+
+                <!-- <% } else {%>
+                  <div class="c-head shipping-option c-margin ">
+                    <div class="c-address c-padding">Delivery Address</div>    
+                    <div ><button id="addAddress" type="button"><i class='bx bx-plus'></i> &nbsp;Add Address</button></div>            
+                  </div>
+                  <% }%> -->
+       
+             
+              <div class="c-head no-margin">
+                <div class="c-prod t-padding">Products Ordered</div>
+                <div class="c-up"> &nbsp;&nbsp;&nbsp;Unit Price</div>
+                <div class="c-qty c-center"> &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Amount</div>
+                <div class="c-total">Item Subtotal</div>
+              </div>
+              <%if (cartShow.length > 0) {%>
+           
+             <% for(let i = 0; i < cartShow.length; i++){ %>
+
+              <%let maybawas%>
+              <%if(user.customer_position == "Distributor"){%>
+               <%maybawas =cartShow[i].price - (cartShow[i].price * 0.2) %>
+                
+               <%} else {%>
+                 <%maybawas =cartShow[i].price - (cartShow[i].price * 0.1) %>
+                 <%} %>
+              <div class="c-body checkout-body">
+
+                <div class="c-prod tflex"> 
+                  <!-- Product Image -->
+                  <div>
+                  <a href="#">
+                  <img class="t-img" 
+                       src="/products/<%=cartShow[i].prod_img%>"
+                       alt="<%=cartShow[i].prod_img%>"/>
+                  </a>
+                </div>
+                  <!-- Product Name-->
+                  <div>
+                  <% let name = cartShow[i].prod_name; %>
+                      <%if (name.length > 30) {%>
+                        <a href="#"
+                        >Sleek <%= name.slice(0, 29)%> <br /><%=name.slice(29)%>
+                      </a>
+                      <br /><br />
+                    
+                  <% } else { %>
+                    <div>
+                    <a href="#">Sleek <%= name%></a>
+                  </div>
+                    <% } %>
+                  </div>
+                  <!-- Product Categories -->
+                  <div class="c-categories">
+                    <span><%=cartShow[i].prod_categories%></span>
+                  </div>
+                </div>
+                <div class="c-up">₱<%=maybawas%></div>
+                <div class="c-qty tflex quantity">
+         
+                 <div>
+                  <input type="text" name="qty" value="<%=cartShow[i].quantity%>">        
+                </div>
+  
+                </div>              
+                  
+              
+
+                
+                  <div class="c-total t-color"> <% let amount = maybawas *
+                  cartShow[i].quantity%>
+                  <span class="new__price">₱<%=amount%></span>
+                  <input type="text" name="prodAmount" value="<%=amount%>" hidden/>
+
+                </div>
+                <% MSubtotal = MSubtotal + (maybawas * cartShow[i].quantity)%>
+                <input type="text" name="cartId" value="<%=cartShow[i].prod_id%>" hidden/>
+                <input type="text" name="prodssId" value="<%=cartShow[i].cart_id%>" hidden/>
+                
+              </div>
+
+              <% } %>
+      
+              <div class="c-head">
+                <div class="c-prod t-padding">Shipping Details</div>
+              </div>
+              <div class="c-head shipping-option c-margin">
+                <div class="c-prod c-padding">Message: <input type="text" name="message" value="" placeholder="(Optional) Leave a message to seller"/></div>
+                <div class="c-qty c-center"><span id="standard">Standard Local</span><br> <span id="receive">Receive by 9 - 12 Dec</span></div>
+                <div class="c-total">₱100</div>
+                <input type="text" name="receivedDate" value="8 - 11 Nov" hidden/>
+              </div>
+
+              <div class="c-head checkout-head paddingch">
+                <div class="c-prod t-padding">Payment Method</div>
+             
+                <input type="radio" name="radio" id="gcash" checked>
+                <label class="labelForRadio"  for="gcash">G-cash</label>
+                <input type="radio" name="radio" id="paymaya">
+                <label class="labelForRadio" for="paymaya">PayMaya</label>
+                <input type="radio" name="radio" id="unionbank">
+                <label class="labelForRadio"  for="unionbank">UnionBank</label>
+                <input type="radio" name="radio" id="bdo">
+                <label class="labelForRadio" for="bdo">BDO</label>
+                <input type="radio" name="radio" id="bpi">
+                <label class="labelForRadio" for="bpi">BPI</label>
+                
+              
+              </div>
+
+              <div class="c-head-payment shipping-option">
+                <div class="payment-total">
+                  <% let totalPayment = MSubtotal + 100%>
+                  <div class="c-width">Merchandise Subtotal: <span style="padding-left: 80px;">₱<%=MSubtotal%></span></div>
+                  <div class="c-width">Shipping Total: <span style="padding-left: 137px;">₱100</span></div>
+                  <div class="c-width">Total Payment: <span style="padding-left: 134px;">₱<%=totalPayment%></span></div>               
+        
+                <input type="text" name="totalp" value="<%=totalPayment%>" hidden/>
+                </div>      
+              </div>
+              <div class="c-head shipping-option checkout-button">
+                <div class="c-notes">* Settle your payments within 3 days or we will automatically cancel your order <br>* Full payment is required before we process your orders</div>
+                <div class="c-prod-button t-padding"><button type="button" id="placeOrder" >Place Order</button></div>
+              </div>
+
+              <div class="modal-bg">
+                <div class="modal">
+                 
+                  <button id="done" type="submit">Done</button>
+                  <span class="modal-close"><i class='bx bx-x'></i></span>
+                </div>
+              </div>
+
+              <div class="modal-address">
+                <div class="address">
+                  <span class="head-address">New Address</span>
+                  <div class="first-div">
+                    <input type="text" id="fname" class="left-input" placeholder="Full name">
+                    <input type="text" id="phonenumber" placeholder="phonenumber">
+                  </div>
+                  <div class="second-div">
+                    <select id="region" onchange="showRegion(this.value)">
+                      <option style="display: none" value="">Region</option>
+                    
+                    </select>
+                    <select id="province" onchange="showProvince(this.value)">
+                      <option style="display: none" value="">Province</option>       
+                    </select>
+                  </div>
+
+                  <div class="second-div">
+                    <select id="city" onchange="showCity(this.value)">
+                      <option style="display: none" value="">City</option>
+                    
+                  
+                    </select>
+                    <select id="barangay">
+                      <option style="display: none" value="">Barangay</option>
+                      
+                    
+                    </select>
+                  </div>
+                  <input class="postal" id="zipcode" type="text" placeholder="Zip code">
+                  <input class="postal" id="street" type="text" placeholder="Street Name, Building, House No.">
+                  <span class="label-address">Label As:</span><br/><br/>
+                  <input type="radio" value="Home" name="labelAddress" id="home" checked>
+                  <label class="addressRadio"  for="home">Home</label>
+                  
+                  <input type="radio" value="Work" name="labelAddress" id="work">
+                  <label class="addressRadio" for="work">Work</label><br/><br/>
+                  <div class="default-div">
+                  <input type="checkbox" class="default"/>
+                  <span class="set">Set as default Address</span>
+                </div>
+                <div class="second-div btn-address">
+                <button class="addressBtn" type="button">Submit</button>
+              </div>
+              <div class="error-div">
+                <span class="error"></span>
+              </div>
+                  <span class="address-close"><i class='bx bx-x'></i></span>
+                </div>
+              </div>
+          
+        
+            </form>
+              <% } %>
+              <div class="change-modal-address">
+                <div class="address">
+                  <span class="head-address">Change Address</span>
+                  <div class="first-div">
+                    <input type="text" id="fname" class="left-input" placeholder="Full name">
+                    <input type="text" id="phonenumber" placeholder="phonenumber">
+                  </div>
+                  <div class="second-div">
+                    <select id="regionChange" onchange="showR(this.value)">
+                      <option id="rVal" style="display: none" value="">Region</option>
+                    
+                    </select>
+                    <select id="provinceChange" onchange="showP(this.value)">
+                      <option id="solid" style="display: none" value="">Province</option>       
+                    </select>
+                  </div>
+
+                  <div class="second-div">
+                    <select id="city" onchange="showCity(this.value)">
+                      <option style="display: none" value="">City</option>
+                    
+                  
+                    </select>
+                    <select id="barangay">
+                      <option style="display: none" value="">Barangay</option>
+                      
+                    
+                    </select>
+                  </div>
+                  <input class="postal" id="zipcode" type="text" placeholder="Zip code">
+                  <input class="postal" id="street" type="text" placeholder="Street Name, Building, House No.">
+                  <span class="label-address">Label As:</span><br/><br/>
+                  <input type="radio" value="Home" name="labelAddress" id="home"/>
+                  <label class="addressRadio"  for="home">Home</label>
+                  
+                  <input type="radio" value="Work" name="labelAddress" id="work">
+                  <label class="addressRadio" for="work">Work</label><br/><br/>
+                 
+                <div class="second-div btn-address">
+                <button class="addressBtn" type="button">Submit</button>
+              </div>
+              <div class="error-div">
+                <span class="error"></span>
+              </div>
+                  <span class="address-close2"><i class='bx bx-x'></i></span>
+                </div>
+              </div>
+
+              
+            </div>
+
+
+
+         
+        </div>
+      </div>
+
+    </section>
+
+
+    <%- include('../partials/footer'); %>
+    <script type="text/javascript" src="/js/phil.min.js"></script>
+<script>  
+
+
+
+
+// const months = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sept","Oct","Nov","Dec"];
+
+// const checkedRadio = $('input[name="addr"]:checked').val();
+// let firstDay;
+// let lastDay;
+// const d = new Date();
+
+// if(checkedRadio.includes("(NCR)")){
+// firstDay= d.getDate()+2;
+//  lastDay= d.getDate()+5;
+//  $("#standard").html("Standard Local");
+// $("#receive").html("Receive "+firstDay + " - "+lastDay +" "+months[d.getMonth()]);
+// }else{
+//   firstDay= d.getDate()+2;
+//   lastDay= d.getDate()+7;
+//  $("#standard").html("Standard Luzon, Visayas and Mindanao ");
+// $("#receive").html("Receive "+firstDay + " - "+lastDay +" "+months[d.getMonth()]);
+// }
+
+const changeRegion = document.querySelector("#regionChange");
+const changeprovince = document.querySelector("#provinceChange");
+
+
+
+// function showR(r) {
+//   console.log(r);
+
+// //   changeprovince.innerHTML= `<option style="display: none" value="">Province</option>  `
+// //  if(r.length > 0 ){
+// //   changeprovince.disabled = false;
+// //   let reg=Philippines.getProvincesByRegion(r);
+// //   for(let i=1; i <reg.length; i++){
+// //     changeprovince.innerHTML += `<option value="${reg[i].prov_code}">${reg[i].name}</option>`
+// //   }
+// //  }else{
+// //   changeprovince.disabled = true;
+// //  }
+// }
+
+
+$(document).ready(function () {
+  $.ajax({
+    url: "/sleekskincare/checkout-render-address",
+    contentType: "application/json",
+    success: function (res) {
+      let tbody = $(".alladdress");
+      tbody.html("");
+      res.results.forEach(function (bod) {
+        tbody.append(htmlBody(bod));
+        // $(".change-modal-address #fname").val(res.results[0].fullname);
+        // $(".change-modal-address #phonenumber").val(res.results[0].phonenumber);
+        // $(".change-modal-address #zipcode").val(res.results[0].zipcode);
+        // $(".change-modal-address #street").val(res.results[0].street);
+        // $(".change-modal-address #solid").val("val2").change();
+        // $('.change-modal-address #home').attr("checked", "checked");
+        // $(`.change-modal-address input[value=Home]`).attr("checked", "checked");
+      });
+    },
+  });
+});
+
+
+
+
+
+
+
+  const selectRegion = document.querySelector("#region");
+  const selectprovince = document.querySelector("#province");
+  const selectcity = document.querySelector("#city");
+  const selectbarangay = document.querySelector("#barangay");
+  selectprovince.disabled = true;
+  selectcity.disabled = true;
+  selectbarangay.disabled = true;
+
+  Philippines.regions.forEach(
+  (op) => (selectRegion.innerHTML += `<option value="${op.reg_code}">${op.name}</option>`)
+);
+
+function showRegion(r) {
+  selectprovince.innerHTML= `<option style="display: none" value="">Province</option>  `
+ if(r.length > 0 ){
+  selectprovince.disabled = false;
+  let reg=Philippines.getProvincesByRegion(r);
+  for(let i=1; i <reg.length; i++){
+    selectprovince.innerHTML += `<option value="${reg[i].prov_code}">${reg[i].name}</option>`
+  }
+ }else{
+  selectprovince.disabled = true;
+ }
+}
+
+
+
+function showProvince(p) {
+  selectcity.innerHTML= `<option style="display: none" value="">City</option>  `
+ if(p.length > 0 ){
+  selectcity.disabled = false;
+  Philippines.getCityMunByProvince(p).forEach(
+  (op) => (selectcity.innerHTML += `<option value="${op.mun_code}">${op.name}</option>`)
+);
+ }else{
+  selectcity.disabled = true;
+ }
+ 
+}
+
+function showCity(c) {
+  selectbarangay.innerHTML= `<option style="display: none" value="">Barangay</option>  `
+ if(c.length > 0 ){
+  selectbarangay.disabled = false;
+  Philippines.getBarangayByMun(c).forEach(
+  (op) => (selectbarangay.innerHTML += `<option value="${op.name}">${op.name}</option>`)
+);
+ }else{
+  selectbarangay.disabled = true;
+ }
+}
+
+
+const modalBtn =document.querySelector("#placeOrder");
+const modalBg = document.querySelector(".modal-bg");
+const modal = document.querySelector(".modal");
+const modalClose = document.querySelector(".modal-close");
+const output = document.querySelector(".header-1");
+const btn=document.getElementById("done");
+let imgLogo = document.createElement("img");
+let imgQr = document.createElement("img");
+let logoSrc = document.createAttribute("src");
+let logoClass = document.createAttribute("class");
+let QrSrc = document.createAttribute("src");
+let QrClass = document.createAttribute("class");
+
+logoClass.value ="img-logo"
+QrClass.value ="img-Qr"
+
+
+modalBtn.addEventListener('click', function(){
+  const radioBtn = document.querySelector("input[name='radio']:checked").id;
+
+  if(radioBtn == "gcash"){
+    logoSrc.value ="/img/gcashlogo.png"
+    QrSrc.value ="/img/gcashqr.jpg"
+  }else if(radioBtn == "bpi"){
+    logoSrc.value ="/img/bpilogo.png"
+    QrSrc.value ="/img/bpiqr.jpg"
+  }else if(radioBtn == "bdo"){
+    logoSrc.value ="/img/bdologo.png"
+    QrSrc.value ="/img/bdoqr.jpg"
+  }else if(radioBtn == "paymaya"){
+    logoSrc.value ="/img/paymayalogo.png"
+    QrSrc.value ="/img/paymayaqr.jpg"
+  }else if(radioBtn == "unionbank"){
+    logoSrc.value ="/img/unionbanklogo.png"
+    QrSrc.value ="/img/unionbankqr.jpg"
+  }
+ 
+
+  imgLogo.setAttributeNode(logoSrc);
+  imgLogo.setAttributeNode(logoClass);
+
+  imgQr.setAttributeNode(QrSrc);
+  imgQr.setAttributeNode(QrClass);
+  modalBg.classList.add('bg-active');
+  modal.insertBefore(imgLogo,btn);
+  modal.insertBefore(imgQr,btn);
+ 
+});
+modalClose.addEventListener('click', function(){
+  modalBg.classList.remove('bg-active');
+  imgLogo.remove();
+});
+
+const modalAdd = document.querySelector("#addAddress");
+const address = document.querySelector(".modal-address");
+const addressClose = document.querySelector(".address-close");
+
+modalAdd.addEventListener('click', function(){
+  address.classList.add('bg-active2');
+});
+
+addressClose.addEventListener('click', function(){
+  address.classList.remove('bg-active2');
+
+});
+
+
+$(document).ready(function () {
+  $(".addressBtn").click(function () {
+    const region =$("#region :selected").text();
+    const province =$("#province :selected").text();
+    const city= $("#city :selected").text();
+    const barangay =$("#barangay :selected").text();
+    const phonenumber=$("#phonenumber").val();
+    const fullname=$("#fname").val();
+    const zipcode=$("#zipcode").val();
+    const street=$("#street").val();
+  
+    $.ajax({
+      url: "/sleekskincare/address",
+      contentType: "application/json",
+      data: JSON.stringify({ street,zipcode,region,province,city,barangay,phonenumber,fullname }),
+      method: "POST",
+      success: function (res) {
+        if (res.status == "err") {
+          $(".error").html(res.msg);      
+        }
+        else{
+          address.classList.remove('bg-active2');
+          let tbody = $(".alladdress");
+        tbody.html("");
+
+        res.body.forEach(function (bod) {
+          tbody.append(htmlBody(bod));
+        });
+        }
+      },
+    });
+  });
+});
+
+
+
+function htmlBody(bod) {
+  let tBody;
+  return (tBody =
+    `<div class="c-prod c-padding blocking new-width">\
+      <input type="radio" name="addr" checked>\
+      <span class="bolder">` +bod.fullname + "&nbsp;&nbsp;&nbsp; +(63) "+bod.phonenumber  +`</span>`
+      +" "+bod.street +" "+ bod.barangay +" "+ bod.city +" "+ bod.zipcode + `<span class="lighter"> </span>\
+      </div>`
+);
+}   
+
+
+
+const changeaddress = document.querySelector(".change-modal-address");
+const addressClose2 = document.querySelector(".address-close2");
+const changemodalAdd = document.querySelector("#changeAddress");
+
+
+// changemodalAdd.addEventListener('click', function(){
+//   changeaddress.classList.add('bg-active3');
+// });
+
+// addressClose2.addEventListener('click', function(){
+//   changeaddress.classList.remove('bg-active3');
+
+// });
+
+</script>
+  </body>
+</html>

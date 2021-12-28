@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head_admin'); %>
+  <body>
+    <%- include('../partials/sidebar_admin'); %>
+    <section class="add-product">
+      <form
+        action="/admin/add-product"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div class="small-container">
+          <div class="left-side">
+            <div class="all-header">
+              <a href="/admin/all-product">
+                <i class="bx bx-left-arrow-alt"></i>
+              </a>
+              <span>Add product</span>
+            </div>
+            <div class="title-div">
+              <div class="name">Name</div>
+              <input type="text" name="prod_name" />
+              <div class="name">Description</div>
+              <textarea class="details" name="prod_details"></textarea>
+            </div>
+            <div class="media-div">
+              <div class="name">Media</div>
+              <img src="/img/media.png" id="photo" />
+              <input type="file" id="file" name="prod_imgs" accept="image/*" />
+              <label for="file" id="uploadBtn"></label>
+            </div>
+            <button type="submit" id="btn-product">Add Product</button>
+          </div>
+          <div class="prod-info">
+            <div class="name">Product status</div>
+            <select id="prod-status" name="prod_status"></select>
+            <div class="details-status">
+              This product will be hidden from consumer
+            </div>
+            <div class="name p">Product Category</div>
+            <select id="prod-categ" name="category"></select>
+            <div class="name pricing">Pricing</div>
+            <input type="number" id="price" name="price" />
+            <div class="name qty">Quantity</div>
+            <input type="number" name="prod_qty" id="prod-qty" />
+            <div class="name p">Expiration</div>
+            <input type="date" id="prod-qty" name="expiration" />
+          </div>
+        </div>
+      </form>
+    </section>
+    <%- include('../partials/footer_admin'); %>
+    <script src="/js/image2.js"></script>
+    <script>
+      const selectVal = document.querySelector("#prod-status");
+      ["Draft", "Active"].forEach(
+        (op) => (selectVal.innerHTML += `<option value="${op}">${op}</option>`)
+      );
+
+      $("#prod-status").change(function () {
+        if ($(this).val() == "Draft") {
+          $(".details-status").html(
+            "This product will be hidden from consumer"
+          );
+        } else if ($(this).val() == "Active") {
+          $(".details-status").html(
+            "This product will be available to consumer"
+          );
+        }
+      });
+    </script>
+  </body>
+</html>

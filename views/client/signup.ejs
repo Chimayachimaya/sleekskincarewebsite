@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head'); %>
+  <body>
+    <%- include('../partials/header'); %>
+    <section class="login-section container">
+      <div class="login-container">
+        <div class="login-forms sign-height">
+          <div class="login-left">
+            <form>
+              <div class="login-field">
+                <label>Phone Number</label>
+                <input type="text" id="phoneno" placeholder="(+63)" />
+              </div>
+
+              <div>
+                <button class="btn btns">Sign Now</button>
+              </div>
+              <!-- 
+              <div class="social-media">
+                <div class="fb"><i class="bx bxl-facebook-circle"></i></div>
+                <div class="google">
+                  <i class="bx bxl-google-plus-circle"></i>
+                </div>
+              </div> -->
+              <div class="dont-account">
+                <p>
+                  Already have an account?
+                  <a href="/sleekskincare/login">Log In</a>
+                </p>
+              </div>
+              <div class="err-login">
+                <span id="err-show"></span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="agreement-container">
+        <p>
+          * By signing in, you agree to our <a href="#">Terms of Use</a> and to
+          receive Sleek emails & updates and acknowledge <br />that you read our
+          <a href="#">Privacy Policy</a>.
+        </p>
+      </div>
+    </section>
+    <%- include('../partials/footer'); %>
+    <script src="/js/signup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head_admin'); %>
+  <body>
+    <%- include('../partials/sidebar_admin'); %>
+    <section class="add-product user-div">
+      <form action="/admin/add-user" method="post">
+        <div class="small-container user-container">
+          <div class="left-side">
+            <div class="all-header">
+              <a href="/admin/all-product">
+                <i class="bx bx-left-arrow-alt"></i>
+              </a>
+              <span>Add User</span>
+            </div>
+            <div class="title-div user-title">
+              <div class="name">Name</div>
+              <input type="text" name="name" />
+              <div class="name">Contact</div>
+              <input type="text" name="contact" />
+              <div class="name">Email</div>
+              <input type="text" name="email" />
+              <div class="name">Password</div>
+              <input type="password" name="password" />
+            </div>
+
+            <button type="submit" id="btn-product">Add User</button>
+          </div>
+        </div>
+      </form>
+    </section>
+    <%- include('../partials/footer_admin'); %>
+  </body>
+</html>

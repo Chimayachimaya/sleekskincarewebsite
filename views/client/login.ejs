@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head'); %>
+  <body>
+    <%- include('../partials/header'); %>
+    <section class="login-section">
+      <div class="container">
+        <div class="login-forms">
+          <div class="login-left">
+            <form>
+              <div class="login-field">
+                <label>Email</label>
+                <input type="text" id="email" />
+              </div>
+
+              <div class="login-field phone">
+                <label>Password</label>
+                <input type="password" id="password" />
+              </div>
+
+              <div class="login-remember">
+                <a href="/sleekskincare/forgot-password" id="showBox"
+                  >Forgot Password or Email?</a
+                >
+              </div>
+
+              <div>
+                <button class="btn btn-sign">Sign Now</button>
+              </div>
+
+              <!-- <div class="social-media">
+                <div class="fb"><i class="bx bxl-facebook-circle"></i></div>
+                <div class="google">
+                  <i class="bx bxl-google-plus-circle"></i>
+                </div>
+              </div> -->
+              <div class="dont-account">
+                <p>
+                  Don't have an account?
+                  <a href="/sleekskincare/signup">Sign Up</a>
+                </p>
+              </div>
+              <div class="err-login">
+                <span id="err-show"></span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="agreement-container">
+        <p>
+          * By logging in, you agree to our <a href="#">Terms of Use</a> and to
+          receive Sleek emails & updates and acknowledge <br />that you read our
+          <a href="#">Privacy Policy</a>.
+        </p>
+      </div>
+    </section>
+    <%- include('../partials/footer'); %>
+  </body>
+  <script src="/js/login.js"></script>
+</html>

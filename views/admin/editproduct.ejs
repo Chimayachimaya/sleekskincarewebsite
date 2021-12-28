@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head_admin'); %>
+  <body>
+    <%- include('../partials/sidebar_admin'); %>
+    <section class="add-product">
+      <div class="small-container">
+        <div class="left-side">
+          <div class="all-header">
+            <a href="/admin/all-product">
+              <i class="bx bx-left-arrow-alt"></i>
+            </a>
+            <span>Edit product</span>
+          </div>
+          <div class="title-div">
+            <div class="name">Name</div>
+            <input type="text" value="<%=editProd[0].prod_name%>" />
+            <div class="name">Description</div>
+            <textarea class="details"><%=editProd[0].prod_details%></textarea>
+          </div>
+          <div class="media-div">
+            <div class="name">Media</div>
+            <img src="/products/<%=editProd[0].prod_img%>" id="photo" />
+            <input type="file" id="file" accept="image/*" />
+            <input
+              type="hidden"
+              id="prod_id"
+              value="<%=editProd[0].prod_id%>"
+            />
+            <label for="file" id="uploadBtn"></label>
+          </div>
+          <button id="add_prod">Edit product</button>
+          <a id="delete_prod" href="/admin/delete/<%=editProd[0].prod_id%>"
+            >Delete product</a
+          >
+        </div>
+
+        <div class="prod-info">
+          <div class="name">Product status</div>
+          <select id="prod-status">
+            <option value="<%=editProd[0].prod_status%>" style="display: none">
+              <%=editProd[0].prod_status%>
+            </option>
+          </select>
+          <div class="details-status">
+            This product will be hidden from consumer
+          </div>
+          <div class="name p">Product Category</div>
+          <select id="prod-categ">
+            <option
+              value="<%=editProd[0].prod_categories%>"
+              style="display: none"
+            >
+              <%=editProd[0].prod_categories%>
+            </option>
+          </select>
+          <div class="name pricing">Pricing</div>
+          <input type="number" id="price" value="<%=editProd[0].price%>" />
+          <div class="name qty">Quantity</div>
+          <input
+            type="number"
+            id="prod-qty"
+            value="<%=editProd[0].prod_qty%>"
+          />
+          <div class="name p">Expiration</div>
+          <input
+            type="text"
+            id="prod-qty"
+            value="<%=editProd[0].expiration%>"
+            name="expiration"
+          />
+        </div>
+      </div>
+    </section>
+
+    <%- include('../partials/footer_admin'); %>
+    <script>
+      const selectVal = document.querySelector("#prod-status");
+      ["Draft", "Active", "Archive"].forEach(
+        (op) => (selectVal.innerHTML += `<option value="${op}">${op}</option>`)
+      );
+
+      $("#prod-status").change(function () {
+        if ($(this).val() == "Draft" || $(this).val() == "Archive") {
+          $(".details-status").html(
+            "This product will be hidden from consumer"
+          );
+        } else if ($(this).val() == "Active") {
+          $(".details-status").html(
+            "This product will be available to consumer"
+          );
+        }
+      });
+    </script>
+    <script src="/js/image.js"></script>
+  </body>
+</html>

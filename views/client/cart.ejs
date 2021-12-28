@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head'); %>
+  
+  <body>
+    <%- include('../partials/header'); %>
+     <%if (user.customer_id > 0) {%>
+
+    <section class="cart-section">
+      <div class="container">
+        <div class="responsive__cart-area">
+          <div class="cart-form">
+           
+            <%if (cartShow.length > 0) {%>
+            <div class="cart-table">
+       
+              <div class="t-head">
+                <div class="t-prod">Product</div>
+                <div class="t-up">Unit Price</div>
+                <div class="t-qty t-center">Quantity</div>
+                <div class="t-total">Total</div>
+                <div>Actions</div>
+              </div>
+
+             <% for(let i = 0; i < cartShow.length; i++){ %>
+              <%let maybawas%>
+                <%if(user.customer_position == "Distributor"){%>
+                 <%maybawas =cartShow[i].price - (cartShow[i].price * 0.2) %>
+                  
+                 <%} else {%>
+                   <%maybawas =cartShow[i].price - (cartShow[i].price * 0.1) %>
+                   <%} %>
+              <div class="t-body">
+                <div>
+                  <form>
+                  <input type="checkbox" name="<%=cartShow[i].cart_id%>" class="prod-pricee" value="<%=maybawas * cartShow[i].quantity%>" />
+                 </form>
+                </div>
+
+                <div class="t-prod tflex"> 
+                  <!-- Product Image -->
+                  <div>
+                  <a href="#">
+                  <img class="t-img" 
+                       src="/products/<%=cartShow[i].prod_img%>"
+                       alt="<%=cartShow[i].prod_img%>"/>
+                  </a>
+                </div>
+                  <!-- Product Name-->
+                  <div>
+                  <% let name = cartShow[i].prod_name; %>
+                      <%if (name.length > 30) {%>
+                        <a href="#"
+                        >Sleek <%= name.slice(0, 29)%> <br /><%=name.slice(29)%>
+                      </a>
+                      <br /><br />
+                      <small><%=cartShow[i].prod_categories%></small>
+                  <% } else { %>
+                    <a href="#">Sleek <%= name%></a>
+                    <% } %>
+                  </div>
+                </div>
+                
+                <div class="t-up">₱<%=maybawas%></div>
+                <div class="t-qty tflex quantity">
+                  <div>
+                  <a href="/sleekskincare/your-order/update/<%=cartShow[i].prod_id%>" class="btn minus-btn" name="quantity<%=[i]%>">-</a>
+                 </div>
+                 <div>
+                  <input type="text" id="quantity<%=[i]%>" value="<%=cartShow[i].quantity%>" name="quantity">
+                  <input type="text" name="prodsId" value="<%=cartShow[i].prod_id%>" hidden>          
+                </div>
+                <div>
+                  <a href="/sleekskincare/your-order/update/<%=cartShow[i].prod_id%>"  class="btn plus-btn" name="quantity<%=[i]%>">+</a>
+                </div>
+                </div>              
+                  
+              
+                  <div class="t-total t-color"> <% let amount = maybawas *
+                  cartShow[i].quantity%>
+                  <span class="new__price">₱<%=maybawas * cartShow[i].quantity%></span>
+                </div>
+                <div class="t-delete"><a href="/sleekskincare/your-order/delete/<%=cartShow[i].prod_id%>"
+                  ><i class="bx bx-x-circle removeItem"></i></i></a></div>
+              </div>
+          
+              <% } %>
+              <div class="cart-btns">
+                <div class="t-select">
+                  <!-- <input type="checkbox" id="selectAll">
+                  <a href="#">Select All</a> -->
+                </div>
+                <div>
+                   <!-- <a href="#">Delete</a> -->
+                </div>
+               <div class="t-total-all">
+                <p>Total (<span id="item"></span> item): <span id="info"></span></p>
+              </div>
+                <div class="continue__shopping">  
+                  <input type="text" name="ordersIdFromCart" id="IdOrdersCart"  hidden>             
+                  <button class="proceed-cart"> Proceed to checkout</button>
+                </div>            
+              </div>
+        
+
+                  <!-- -- ======== Start List Of Products ======= -- -->
+       <div class="section-title container">
+        <h2>Related <span>Product</span></h2>
+      </div>
+  
+      <section class="list-prod-section">
+        <div class="container">
+          <div class="collection-2-grid list-prod-grid">
+            <!--List Product -->
+            <% if (products.length > 0) { %> <% for(let i = 0; i < 5; i++){ %>
+            <div class="prod-item">
+              <a href="/sleekskincare/product-details/<%= products[i].prod_id %>">
+                <div class="item-img">
+                  <img
+                    src="/products/<%=products[i].prod_img%>"
+                    alt="<%=products[i].prod_img%>"
+                  />
+                </div>
+              </a>
+              <div class="item-info">
+                <div class="product-title2">
+                  <span>
+                    <p class="name-title2"><%= products[i].prod_name%></p>
+                    <% if (Number.isNaN(Math.floor(products[i].No_Of_Reviews /
+                    (products[i].Total_No_Of_Reviews - 1)))) { %> <% for(let i =0;
+                    i < 5; i++){ %>
+                    <i class="bx bxs-star nocolor"></i>
+                    <% } %> <% } else { %> <% let rate =
+                    Math.floor(products[i].No_Of_Reviews /
+                    (products[i].Total_No_Of_Reviews - 1)); %>
+                    <div class="rate-stars">
+                      <% for(let i = 0; i < rate; i++){ %>
+                      <i class="bx bxs-star"></i>
+                      <% } %> <% let rateForNoColor = 5 - rate %> <% for(let i =0;
+                      i < rateForNoColor; i++){ %>
+                      <i class="bx bxs-star nocolor"></i>
+                      <% } %>
+                    </div>
+                    <% } %>
+                  </span>
+                </div>
+  
+                <%let maybawas2%>
+            <%if(user.customer_position == "Distributor"){%>
+             <%maybawas2 =products[i].price - (products[i].price * 0.2) %>
+              
+             <%} else {%>
+               <%maybawas2 =products[i].price - (products[i].price * 0.1) %>
+               <%} %>
+                <span class="price">₱<%= maybawas2 %></span>
+              </div>
+            </div>
+            <% } %> <% } else { %>
+            <div></div>
+            <% } %>
+            <!------------------>
+          </div>
+
+        </div>
+      </section>
+      <!-- -- ======== End List Of Products ======= -- -->
+              <% } else { %>
+              <div class="t-empty-basket">
+                <div class="cart-empty-icon">
+                  <i class="bx bx-cart"></i>
+                </div>
+                <div class="cart-empty-section">
+                  <p class="cart-heading">
+                    Your basket is empty!
+                  </p>  
+                  <div class="cart-btns">
+                    <div class="continue__shopping">
+                      <a href="/sleekskincare">Go Shopping Now</a>
+                    </div>
+                  </div>                 
+              </div>
+              </div>
+              <% }%>              
+            </div>
+
+        
+       
+        </div>
+      </div>
+    </section>
+
+    <% } else {%>
+    <section class="cart-empty-section container">
+      <div class="cart-empty-icon">
+        <i class="bx bx-cart"></i>
+      </div>
+      <div class="cart-text">
+        <p class="cart-heading">
+          <strong>Your basket is empty!</strong>
+          <br />
+          Sign In now to see items you added or saved in a previous visit.
+        </p>
+      </div>
+      <div class="cart-button">
+        <a href="/sleekskincare/login" class="btn btn-cart"
+          ><i class="bx bx-left-arrow-alt"></i> Sign Now</a
+        >
+      </div>
+
+
+    </section>
+
+    
+    <% }%>
+   
+    <div class="null-modal">
+      <div class="modal nullCart">
+       <img src="/img/noorders.png" alt="cart icon">
+       <span>You have not selected<br> any items for checkout</span>
+        <button id="done" class="done1" type="submit">OK</button>
+       
+      </div>
+    </div>
+    <div class="kulng-modal">
+      <div class="modal nullCart">
+       <img src="/img/kulng.png" alt="cart icon">
+<% if(user.customer_position == "Distributor"){%>
+       <span> Hi Kinesa <%=user.customer_fname%>! We're sorry to interrupt but your order didn't meet our criteria as a Distributor. You need to purchase atleast ₱20,000 in order to process your order. Thank you!</span>
+       <%}else{%>
+        <span> Hi Kinesa! We're sorry to interrupt but your order didn't meet our criteria as a Seller. You need to purchase atleast ₱5,000 in order to process your order. Thank you!</span>
+        <%}%>
+       <button id="done" class="done2"  type="submit">OK</button>
+       
+      </div>
+    </div>
+   <%- include('../partials/footer'); %>
+<script src="/js/cart.js"></script>
+<script src="/js/dropdown.js"></script>
+  </body>
+</html>

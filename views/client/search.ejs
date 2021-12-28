@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head'); %>
+  <body>
+    <%- include('../partials/header'); %>
+
+    <section class="search-products">
+      <div class="products-layout container">
+        <%if (products.length > 0){%>
+        <div class="search-center">
+          Search result for <span>'<%=searchValue%>'</span><br />
+          <p>
+            Displaying result(s) <%=products.length%> for '<%=searchValue%>'
+          </p>
+        </div>
+        <%}else{%>
+        <div class="search-center margg">
+          Search result for <span>'<%=searchValue%>'</span><br />
+          <p>
+            Displaying result(s) <%=products.length%> for '<%=searchValue%>'
+          </p>
+        </div>
+        <%}%>
+
+        <!-- <div class="col-1-of-4">
+          <div>
+            <div class="left-title">
+              <label>Category</label>
+            </div>
+
+            <ul class="block-content first-ul">
+              <li>
+                <input type="checkbox" name="" id="" />
+                <label for="">
+                  <span>Face</span>
+                </label>
+              </li>
+
+              <li>
+                <input type="checkbox" name="" id="" />
+                <label for="">
+                  <span>Body</span>
+                </label>
+              </li>
+
+              <li>
+                <input type="checkbox" name="" id="" />
+                <label for="">
+                  <span> Accessories</span>
+                </label>
+              </li>
+
+              <li>
+                <input type="checkbox" name="" id="" />
+                <label for="">
+                  <span>Clothings</span>
+                </label>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="left-title second-title">
+              <label>Brands</label>
+            </div>
+
+            <ul class="block-content">
+              <li>
+                <input type="checkbox" name="" id="" />
+                <label for="">
+                  <span>Gucci</span>
+                  <small>(10)</small>
+                </label>
+              </li>
+
+              <li>
+                <input type="checkbox" name="" id="" />
+                <label for="">
+                  <span>Burberry</span>
+                  <small>(7)</small>
+                </label>
+              </li>
+
+              <li>
+                <input type="checkbox" name="" id="" />
+                <label for="">
+                  <span> Accessories</span>
+                  <small>(3)</small>
+                </label>
+              </li>
+
+              <li>
+                <input type="checkbox" name="" id="" />
+                <label for="">
+                  <span>Valentino</span>
+                  <small>(3)</small>
+                </label>
+              </li>
+
+              <li>
+                <input type="checkbox" name="" id="" />
+                <label for="">
+                  <span>Dolce & Gabbana</span>
+                  <small>(3)</small>
+                </label>
+              </li>
+
+              <li>
+                <input type="checkbox" name="" id="" />
+                <label for="">
+                  <span>Hogan</span>
+                  <small>(3)</small>
+                </label>
+              </li>
+
+              <li>
+                <input type="checkbox" name="" id="" />
+                <label for="">
+                  <span>Moreschi</span>
+                  <small>(3)</small>
+                </label>
+              </li>
+
+              <li>
+                <input type="checkbox" name="" id="" />
+                <label for="">
+                  <span>Givenchy</span>
+                  <small>(3)</small>
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-3-of-4">
+          <form action="">
+            <div class="right-item">
+              <span for="sort-by">Sort By</span>
+
+              <input type="radio" name="sorting" />
+              <label>Relevance</label>
+
+              <input type="radio" name="sorting" />
+              <label>Latest</label>
+
+              <input type="radio" name="sorting" />
+              <label>Top Sales</label>
+            </div>
+            <div class="right-item">
+              <span for="order-by">Order</span>
+              <select name="order-by" id="sort-by">
+                <option value="ASC" selected="selected">ASC</option>
+                <option value="DESC">DESC</option>
+              </select>
+            </div>
+          </form> -->
+
+        <!-- -- ======== Start List Of Products ======= -- -->
+
+        <section class="list-prod-section">
+          <div class="container">
+            <div class="collection-2-grid list-prod-grid">
+              <!--List Product -->
+              <% if (products.length > 0) { %> <% for(let i = 0; i <
+              products.length; i++){ %>
+              <div class="prod-item">
+                <a
+                  href="/sleekskincare/product-details/<%= products[i].prod_id %>"
+                >
+                  <div class="item-img">
+                    <img
+                      src="/products/<%=products[i].prod_img%>"
+                      alt="<%=products[i].prod_img%>"
+                    />
+                  </div>
+                </a>
+                <div class="item-info">
+                  <div class="product-title2">
+                    <span>
+                      <p class="name-title2"><%= products[i].prod_name%></p>
+                      <% if (Number.isNaN(Math.floor(products[i].No_Of_Reviews /
+                      (products[i].Total_No_Of_Reviews - 1)))) { %> <% for(let i
+                      =0; i < 5; i++){ %>
+                      <i class="bx bxs-star nocolor"></i>
+                      <% } %> <% } else { %> <% let rate =
+                      Math.floor(products[i].No_Of_Reviews /
+                      (products[i].Total_No_Of_Reviews - 1)); %>
+                      <div class="rate-stars">
+                        <% for(let i = 0; i < rate; i++){ %>
+                        <i class="bx bxs-star"></i>
+                        <% } %> <% let rateForNoColor = 5 - rate %> <% for(let i
+                        =0; i < rateForNoColor; i++){ %>
+                        <i class="bx bxs-star nocolor"></i>
+                        <% } %>
+                      </div>
+                      <% } %>
+                    </span>
+                  </div>
+                  <% if (user.customer_position == "distributor") { %> <% let
+                  disPrice =products[i].price - (products[i].price * 0.20) %>
+                  <div class="price">
+                    ₱<%= disPrice %> <span>₱<%=products[i].price %></span>
+                  </div>
+                  <% } else { %> <% let sePrice =products[i].price -
+                  (products[i].price * 0.10) %>
+                  <div class="price">
+                    ₱<%= sePrice %> <span>₱<%=products[i].price %></span>
+                  </div>
+                  <% } %>
+                </div>
+              </div>
+              <% } %> <% } else { %>
+              <div></div>
+              <% } %>
+              <!------------------>
+            </div>
+          </div>
+        </section>
+        <!-- -- ======== End List Of Products ======= -- -->
+      </div>
+      <!-- </div> -->
+    </section>
+
+    <%- include('../partials/footer'); %>
+
+    <script src="/js/dropdown.js"></script>
+  </body>
+</html>

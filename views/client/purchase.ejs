@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head'); %>
+  <body>
+    <%- include('../partials/header'); %>
+
+    <section class="cart-section">
+      <div class="container">
+        <div>
+          <div class="cart-form">
+            <div class="wrapper">
+              
+              <div class="div-header">
+                <div class="div-all bord-active">
+                <a href="/sleekskincare/mypurchase">All</a>
+              </div>
+              <div class="div-all">
+                <a href="/sleekskincare/mypurchase/toship">To Ship</a>
+              </div>
+              <div class="div-all">
+                <a href="/sleekskincare/mypurchase/toreceive">To Receive</a>
+              </div>
+              <div class="div-all">
+                <a href="/sleekskincare/mypurchase/completed">Completed</a>
+              </div>
+              <div class="div-all">
+                <a href="/sleekskincare/mypurchase/cancelled">Cancelled</a>
+              </div>
+              </div>
+   
+
+              <section class="purchase-body">
+             
+                 
+                  <% if (allOrders.length > 0) {%> <%
+                  Object.entries(allOrders).forEach(([key, value]) => {%>
+                    <% let totalP= 0%>
+                    <div class="c-head no-margin has">
+                      <div class="c-prod t-padding">Products Ordered</div>
+                      <div class="t-color"><%=value[0].order_status %></div>
+                    </div>
+                    <% for(let i = 0; i < value.length; i++){%>
+  
+                    <div class="c-body purchase-body hey-body">
+                      <div class="c-prod tflex">
+                        <!-- Product Image -->
+                        <div>
+                          <a href="#">
+                            <img
+                              class="t-img"
+                              src="/products/<%=allOrders[key][i].prod_img %>"
+                              alt=""
+                            />
+                          </a>
+                        </div>
+                        <!-- Product Name-->
+                        <%let maybawas%>
+                        <%if(user.customer_position == "Distributor"){%>
+                         <%maybawas =allOrders[key][i].price - (allOrders[key][i].price * 0.2) %>
+                          
+                         <%} else {%>
+                           <%maybawas =allOrders[key][i].price - (allOrders[key][i].price * 0.1) %>
+                           <%} %>
+                    
+                        <div class="name-ords">
+                          <a href="#">Sleek <%=allOrders[key][i].prod_name %></a></br>x<%=allOrders[key][i].quantity %>
+                        </div>
+                        <div class="name-order">
+                          <span>₱<%= maybawas * allOrders[key][i].quantity %></span>
+                        </div>
+                     
+                       <% totalP= allOrders[key][i].total_amount%>
+                      </div>
+                      <% }%>
+                      <div class="c-total t-color purchase-price ssa">
+                        <div class="ordds">
+          
+                          <span>ORDER ID: &nbsp;</span><%= key%>
+                      
+                      </div>
+                      <div class="totalss-order">
+                    
+                          <span class="colos">₱<%= totalP%></span>
+                         
+                      </div>           
+                    </div>
+
+                    <div class="c-total t-color sasa">
+                      <div class="ordds">
+        
+                    
+                    </div>
+                    
+                      <%if (value[0].order_status == "Pending"){ %>
+                        <div class="totalss-order purchase-price">
+                        <button id="bcancel" class="btncancel" value="<%= key%>">Cancel</button>
+                      </div>  
+                        <%} else if (value[0].order_status == "Accept") {%>
+                       <div class="pp"></div>
+                        <%}else if(value[0].order_status == "Completed") {%>
+                          <div class="totalss-order purchase-price">
+                            <button class="btncancel">Rate</button>
+                          </div>  
+                          <%}%>
+                   
+                                   
+                  </div>
+                  <% });}else{%>               
+                    <div class="all-orders">
+                      <img src="/img/order.png" alt="order icon" />
+                      <span>Your orders will show here</span>
+                    </div>                 
+                 
+                  <% }%>
+                    </div>
+                
+            
+              
+           
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="dot">.</div>
+    <%- include('../partials/footer'); %>
+
+    <script src="/js/dropdown.js"></script>
+  <script src="/js/purchase.js"></script>
+  </body>
+</html>

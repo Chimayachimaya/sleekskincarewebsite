@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head'); %>
+  <body>
+    <%- include('../partials/header'); %> 
+
+    <section class="cart-section">
+      <div class="container">
+        <div>
+          <div class="cart-form">
+         
+       
+            <div class="account-table">
+       
+              <div class="acc-box">
+                <div class="acc-header">
+                    <span>My Account</span>
+                    <p>Manage and protect your account</p>
+                </div>
+                <form action="/sleekskincare/myaccount" method="post" enctype="multipart/form-data">
+                <div class="acc-body">
+                    <div class="acc-left">
+                      <div class="display_flex">
+                      <div class="field hak">
+                        <div class="label">First Name</div>
+                        <input type="text" id="fname" value="<%=user.customer_fname%>" name="fname"/>
+                      </div>
+                      <div class="field hak ">
+                        <div class="label">Last Name</div>
+                        <input type="text" id="lname" value="<%=user.customer_lname%>" name="lname"/>
+                      </div>
+                    </div>
+
+                    <div class="display_flex">
+                      <div class="field hak">
+                        <div class="label">Email Address</div>
+                        <input type="text" id="email" value="<%=user.customer_email%>" name="email"/>
+                      </div>
+                      <div class="field hak ">
+                        <div class="label">City / Area</div>
+                        <select id="area" class="select-1" name="area">
+                          <option style="display: none" value="<%=user.customer_area%>">
+                            &nbsp;&nbsp;<%=user.customer_area%>
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+
+                   
+                        
+
+                         
+                           
+                          
+                                <div class="acc-flex">
+                                        
+                                        <div>
+                                        <button type="button"  class="buton done">Save</button>
+                                          </div>
+
+                                          
+                                            <div>
+                                            <button type="button" class="buton jaja">Cancel</button>
+                                              </div>
+                                    </div>
+
+                                    <div class="modal-acc">
+                                      <div class="modal-a">
+                                        <span class="pass-text">Enter your current password:</span>
+                                       <input type="text" >
+                                        <button id="done" type="submit">Done</button>
+                                        <span class="modal-close"><i class='bx bx-x'></i></span>
+                                      </div>
+                                    </div>
+
+                    </div>
+                    <div class="acc-right">
+                        <div class="profile-pic-div profi ">  
+                    <% if( user.customer_img == null){%>   
+
+                      <img src="/img/profile.png" id="photo"> 
+
+                      <%}else{%> 
+
+                        <img src="/profiles/<%=user.customer_img%>" id="photo">
+
+                        <%}%>
+
+                 
+                          
+                      
+
+                  <input type="file" id="file" name="profile" accept="image/*">
+                  <label for="file" id="uploadBtn">Choose Photo</label>                   
+                        </div>
+                        <div class="t-size">
+                            <span>File size: maximum 1 MB</span>
+        
+                        </div>
+                        
+                    </div>
+                </div>
+              </form>
+              </div>
+          
+            </div>
+
+        
+       
+        </div>
+      </div>
+
+      <div class="modal-none">
+        <div class="modal-n">
+          <span class="pass-text2">Apply some changes first.</span>
+       
+          <span class="modal-close2"><i class='bx bx-x'></i></span>
+        </div>
+      </div>
+    </section>
+    
+
+    <%- include('../partials/footer'); %>
+    <script src="/js/image.js"></script>
+    <script src="/js/area.js"></script>
+    <script src="/js/dropdown.js"></script>
+
+    <script>
+
+      $(document).ready(function () {
+  $(".jaja").on("click", function (e) {
+    location.reload();
+
+  });
+});
+
+let filess;
+
+$('input[type="file"]').change(function(e) {
+  let fileName = e.target.files[0].name;
+filess=fileName
+});
+const addressClose = document.querySelector(".modal-close");
+const address = document.querySelector(".modal-acc");
+const noneClose = document.querySelector(".modal-close2");
+const modalNone = document.querySelector(".modal-none");
+$(document).ready(function () {
+  $(".done").on("click", function (e) {
+    e.preventDefault();
+    const email = $("#email").val();
+    const fname = $("#fname").val();
+    const lname = $("#lname").val();
+    const area = $("#area").val();
+    const file1 = filess;
+    $.ajax({
+      method: "POST",
+      data: {email,area,lname,fname,file1},
+      url: "/sleekskincare/validation",
+      success: function (res) {
+        if (res.msg.length > 0) {
+          modalNone.classList.add('bg-active2');  
+        } else {
+          address.classList.add('bg-active2');     
+        }
+      },
+    });
+  });
+});
+
+noneClose.addEventListener('click', function(){
+  modalNone.classList.remove('bg-active2');
+
+});
+
+
+addressClose.addEventListener('click', function(){
+  address.classList.remove('bg-active2');
+
+});
+
+
+
+
+
+
+
+    </script>
+  </body>
+</html>

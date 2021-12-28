@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head_admin'); %>
+  <body>
+    <%- include('../partials/sidebar_admin'); %>
+    <section class="all-product">
+      <div class="container">
+        <div class="all-header">
+          <div class="all-title">
+            <span>Users</span>
+          </div>
+          <div class="add-button">
+            <a href="/admin/add-user">Add user</a>
+          </div>
+        </div>
+        <div class="all-table">
+          <div class="wrapper">
+            <input type="radio" name="slider" checked id="all" />
+
+            <div class="all-nav">
+              <nav>
+                <label for="all" class="all">All Users</label>
+              </nav>
+            </div>
+
+            <div class="all-filter">
+              <input type="checkbox" class="each-checkbox" />
+              <div class="select-text">
+                <span>Select all</span>
+              </div>
+              <button
+                type="submit"
+                for="search"
+                class="bx bx-search-alt"
+              ></button>
+              <input
+                type="text"
+                placeholder="Search products"
+                class="all-search"
+                spellcheck="false"
+                autocomplete="off"
+              />
+              <div class="rows-text">
+                <span>Number of rows</span>
+              </div>
+              <select id="number-rows" onchange="showRows(this.value)"></select>
+              <div class="sort-text">
+                <span>Sort By: </span>
+              </div>
+              <select id="sort-by" onchange="showSort(this.value)"></select>
+            </div>
+
+            <div class="all-title-table">
+              <div class="product">
+                <span>Name</span>
+              </div>
+              <div class="category">
+                <span>Category</span>
+              </div>
+              <div class="price">
+                <span>Price</span>
+              </div>
+              <div class="inventory">
+                <span>Inventory</span>
+              </div>
+              <div class="expiration">
+                <span>Expiration</span>
+              </div>
+              <div class="status">
+                <span>Status</span>
+              </div>
+            </div>
+
+            <section class="allproduct-body">
+              <div class="content content-1"></div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+    <%- include('../partials/footer_admin'); %>
+    <script src="/js/allprod.js"></script>
+  </body>
+</html>

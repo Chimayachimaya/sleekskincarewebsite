@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head'); %>
+  <body>
+    <section class="signup container">
+      <div class="signup-headings">
+        <img src="/img/logo.png" alt="Sleek Logo" />
+        <p>Payment Confirmation Page</p>
+      </div>
+      <div class="signup-container">
+        <div class="payment-forms">
+          <div class="signup-left">
+            <form method="post" action="/sleekskincare/login">
+              <div class="txt_field">
+                <input type="text" required name="email" />
+                <span></span>
+                <label>Name</label>
+              </div>
+
+              <div class="txt_field">
+                <input type="text" required name="email" />
+                <span></span>
+                <label>Mobile Number</label>
+              </div>
+
+              <div class="txt_field">
+                <input type="text" required name="email" />
+                <span></span>
+                <label>Order Number</label>
+              </div>
+
+              <div class="main-container">
+                <h2>Payment Channel</h2>
+                <div class="radio-buttons">
+                  <label class="custom-radio">
+                    <input type="radio" name="radio" checked />
+                    <span class="radio-btn"
+                      ><i class="bx bx-check"></i>
+                      <div class="hobbies-icon">
+                        <img src="/img/bpi.png" alt="bpi icon" />
+                      </div>
+                    </span>
+                  </label>
+                  <label class="custom-radio">
+                    <input type="radio" name="radio" />
+                    <span class="radio-btn"
+                      ><i class="bx bx-check"></i>
+                      <div class="hobbies-icon">
+                        <img src="/img/bdo.png" alt="bdo icon" />
+                      </div>
+                    </span>
+                  </label>
+                  <label class="custom-radio">
+                    <input type="radio" name="radio" />
+                    <span class="radio-btn"
+                      ><i class="bx bx-check"></i>
+                      <div class="hobbies-icon">
+                        <img src="/img/unionbank.png" alt="unionbank icon" />
+                      </div>
+                    </span>
+                  </label>
+                  <label class="custom-radio">
+                    <input type="radio" name="radio" />
+                    <span class="radio-btn"
+                      ><i class="bx bx-check"></i>
+                      <div class="hobbies-icon">
+                        <img src="/img/paymaya.png" alt="paymaya icon" />
+                      </div>
+                    </span>
+                  </label>
+                  <label class="custom-radio">
+                    <input type="radio" name="radio" />
+                    <span class="radio-btn"
+                      ><i class="bx bx-check"></i>
+                      <div class="hobbies-icon">
+                        <img src="/img/gcash.png" alt="gcash icon" />
+                      </div>
+                    </span>
+                  </label>
+                </div>
+              </div>
+              <div class="div-proof">
+                <h2 class="proof-text">Proof of Payment</h2>
+              </div>
+              <div class="choose-file">
+                <img src="/img/transparent.png" id="photo" />
+
+                <input type="file" id="file" name="profile" accept="image/*" />
+                <label for="file" id="uploadBtn">Choose File</label>
+              </div>
+              <div class="sign-button">
+                <input type="submit" class="btn btn-payment" value="Submit" />
+              </div>
+            </form>
+          </div>
+          <div class="div-greet">
+            <div class="buttons2">
+              <div class="row">
+                <img src="/img/thank.png" alt="Thank you" class="img1" />
+                <img src="/img/kinesa.png" alt="kineso/kinesa" class="img2" />
+                <img
+                  src="/img/sleekprod.png"
+                  alt="kineso/kinesa"
+                  class="img2"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <%- include('../partials/header'); %> <%- include('../partials/footer'); %>
+    <script text="text/javascript" src="/js/payment.js"></script>
+    <script src="/js/dropdown.js"></script>
+  </body>
+</html>

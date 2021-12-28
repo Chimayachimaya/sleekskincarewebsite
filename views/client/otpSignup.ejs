@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head'); %>
+  <body>
+    <%- include('../partials/header'); %>
+    <section class="signdetails-section">
+      <div class="container">
+        <div class="otp-forms">
+          <div class="container-sign">
+            <div class="progress-bar">
+              <div class="step">
+                <p class="active">Verify</p>
+                <div class="bullet active">
+                  <span>1</span>
+                </div>
+              </div>
+              <div class="step">
+                <p>Your Info</p>
+                <div class="bullet">
+                  <span>2</span>
+                </div>
+              </div>
+              <div class="step">
+                <p>Create Password</p>
+                <div class="bullet">
+                  <span>3</span>
+                </div>
+              </div>
+              <div class="step">
+                <p>Done</p>
+                <div class="bullet">
+                  <span>4</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-outer">
+              <form>
+                <div class="page slide-page">
+                  <div class="enter-ver">Enter Verification Code</div>
+
+                  <div class="enter-label">
+                    Your verification code is sent by SMS to
+                  </div>
+
+                  <div class="enter-label2">(+63) <%=phoneno%></div>
+                  <div class="field"><input type="text" id="code" /></div>
+
+                  <div class="err-msg">
+                    <span id="err"></span>
+                  </div>
+
+                  <div class="field">
+                    <button class="firstNext next">Verify</button>
+                  </div>
+                  <div class="hidden-notrecive">
+                    <span>Did not receive the code?</span>
+                  </div>
+                  <div class="hidden-resend">
+                    <a id="resend">Resend </a><span>or</span>
+                    <a href="/sleekskincare/signup">Wrong Phone No.</a>
+                  </div>
+                  <div class="enter-label3">
+                    Please wait <span id="timer"></span> seconds to resend
+                  </div>
+                </div>
+
+                <div class="page page2">
+                  <input type="text" id="phoneno" value="<%=phoneno%>" hidden />
+
+                  <div class="field">
+                    <div class="label label-1">First name</div>
+                    <input type="text" id="fname" />
+
+                    <div class="label label-2">Last name</div>
+                    <input type="text" id="lname" />
+                  </div>
+
+                  <div class="field">
+                    <div class="label">Email Address</div>
+                    <input type="text" id="email" />
+                  </div>
+                  <div class="field">
+                    <select id="area" class="select-1">
+                      <option style="display: none" value="">
+                        &nbsp;&nbsp;City/Area
+                      </option>
+                    </select>
+
+                    <select id="position">
+                      <option style="display: none" value="">
+                        &nbsp;&nbsp;Position
+                      </option>
+                      <option value="Distributor">Distributor</option>
+                      <option value="Seller">Seller</option>
+                    </select>
+                  </div>
+                  <div class="err-msg3">
+                    <span id="err-all"></span>
+                  </div>
+                  <div class="field btns">
+                    <button class="next-1 next">Next</button>
+                  </div>
+                </div>
+
+                <div class="page marginField">
+                  <div class="field">
+                    <div class="label">Password</div>
+                    <i class="bx bx-hide" id="toggle1"></i>
+                    <input type="password" id="pass1" />
+                  </div>
+                  <div class="field">
+                    <i class="bx bx-hide" id="toggle2"></i>
+                    <div class="label">Confirm Password</div>
+                    <input type="password" id="pass2" />
+                  </div>
+                  <div class="err-msg4">
+                    <span id="err-pass"></span>
+                  </div>
+                  <div class="field btns">
+                    <button class="prev-2 prev">Previous</button>
+                    <button type="submit" class="next-2 next">Submit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="agreement-container">
+          <p>
+            * By signing in, you agree to our <a href="#">Terms of Use</a> and
+            to receive Sleek emails & updates and acknowledge <br />that you
+            read our <a href="#">Privacy Policy</a>.
+          </p>
+        </div>
+      </div>
+      <div class="modal-none">
+        <div class="modal-n">
+          <span class="pass-text3"
+            >A verification code has been sent to <br /><strong
+              >(+63) <%=phoneno%></strong
+            ></span
+          >
+
+          <span class="modal-close2"><i class="bx bx-x"></i></span>
+        </div>
+      </div>
+    </section>
+    <%- include('../partials/footer'); %>
+    <script text="text/javascript" src="/js/otp.js"></script>
+    <script text="text/javascript" src="/js/area.js"></script>
+  </body>
+</html>
